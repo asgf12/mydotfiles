@@ -2,3 +2,5 @@ alias ls="ls --color=auto"
 #alias sudo=""
 alias frogssh="ssh frog@frog02.mikr.us -p 10613"
 alias ta="tmux attach"
+alias grep='grep --color=auto'
+alias vnv='nvim $(fzf -m --preview="bat --color=always {}")'
