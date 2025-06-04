@@ -8,7 +8,7 @@
 [[ -x $(command -v fastfetch) ]] && fastfetch
 [[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vim'
 
-export PATH='~/.local/bin:$PATH'
+export PATH="~/.local/bin:$PATH"
 
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
