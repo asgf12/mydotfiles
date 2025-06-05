@@ -4,7 +4,9 @@
 [ -f ~/.aliases_nix ] && . ~/.aliases_nix
 [ -f ~/.aliases_alp ] && . ~/.aliases_alp
 
-[[ -x $(command -v fzf --bash) ]] && eval "$(fzf --bash)"
+[[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
+
+[[ -x $(command -v "fzf --bash") ]] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
 [[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vim'
 
