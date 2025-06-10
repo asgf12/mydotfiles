@@ -1,5 +1,4 @@
-alias dup="doas apk update && doas apk upgrade"
-alias up="doas apk update && apk list --upgradeable"
+[[ -x $(command -v "flatpak") ]] && alias dup="flatpak update && doas apk update && doas apk upgrade -y" || alias dup="doas apk update && doas apk upgrade"
 alias sudo="doas"
 alias ain="doas apk add"
 alias reboot="doas reboot"
