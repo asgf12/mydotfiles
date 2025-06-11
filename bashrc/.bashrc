@@ -3,6 +3,9 @@
 [ -f ~/.aliases_deb ] && . ~/.aliases_deb
 [ -f ~/.aliases_nix ] && . ~/.aliases_nix
 [ -f ~/.aliases_alp ] && . ~/.aliases_alp
+[ -f ~/.aliases_hat ] && . ~/.aliases_hat`
+
+set -o vi
 
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
 
