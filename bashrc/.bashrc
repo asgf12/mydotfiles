@@ -5,7 +5,7 @@
 [ -f ~/.aliases_alp ] && . ~/.aliases_alp
 [ -f ~/.aliases_hat ] && . ~/.aliases_hat
 
-set -o vi
+#set -o vi
 
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
 
