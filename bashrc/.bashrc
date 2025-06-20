@@ -9,7 +9,7 @@
 
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
 
-[[ -x $(command -v "fzf --bash") ]] && eval "$(fzf --bash)"
+[ -x $(command -v "fzf --bash") ] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
 [[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vim'
 
