@@ -12,7 +12,7 @@
 [[ -x $(command -v "fzf --bash") ]] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
 [[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vim'
-[[ -x $(command -v starship) ]] && starship
+[[ -x $(command -v starship) ]] && eval "$(starship init --print-full-init)"
 
 export PATH="~/.local/bin:$PATH"
 
@@ -24,6 +24,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-cd ~/mydotfiles && git status && cd
+# cd ~/mydotfiles && git status && cd
 
 export PS1="\[\e]0;\u@\h: \w\a\]\[\033[;94m\]┌──${debian_chroot:+($debian_chroot)──}${VIRTUAL_ENV:+(\[\033[0;1m\]$(basename $VIRTUAL_ENV)\[\033[;94m\])}(\[\033[1;31m\]\u@\h\[\033[;94m\])-[\[\033[0;1m\]\w\[\033[;94m\]]\n\[\033[;94m\]└─\[\033[1;31m\]\$ \[\033[0m\]"
