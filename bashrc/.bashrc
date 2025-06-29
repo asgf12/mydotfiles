@@ -1,15 +1,15 @@
-[ -x $(command -v sudo) ] ||  alias sudo=""
-[ -f ~/.defaultaliases ] && . ~/.defaultaliases
-[ -f ~/.aliases_deb ] && . ~/.aliases_deb
-[ -f ~/.aliases_nix ] && . ~/.aliases_nix
-[ -f ~/.aliases_alp ] && . ~/.aliases_alp
-[ -f ~/.aliases_hat ] && . ~/.aliases_hat
+[[ -x $(command -v sudo) ]] ||  alias sudo=""
+[[ -f ~/.defaultaliases ]] && . ~/.defaultaliases
+[[ -f ~/.aliases_deb ]] && . ~/.aliases_deb
+[[ -f ~/.aliases_nix ]] && . ~/.aliases_nix
+[[ -f ~/.aliases_alp ]] && . ~/.aliases_alp
+[[ -f ~/.aliases_hat ]] && . ~/.aliases_hat
 
 #set -o vi
 
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
 
-[[ -x $(command -v "fzf --bash") ]] && eval "$(fzf --bash)"
+[[ -x $(command -v fzf) ]] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
 [[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vim'
 [[ -x $(command -v starship) ]] && eval "$(starship init --print-full-init)"

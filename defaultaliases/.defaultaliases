@@ -7,3 +7,21 @@ alias frogssh="ssh frog@frog02.mikr.us -p 10613"
 alias ta="tmux attach"
 alias grep='grep --color=auto'
 alias vnv='nvim $(fzf -m --preview="bat --color=always {}")'
+
+
+upgrade() {
+  LOGFILE="$HOME/.local/log/update_$(date +%F_%H-%M-%S).log"
+  {
+    [ -x "$(command -v flatpak)" ] && echo "== Flatpak ==" && sudo flatpak update
+    [ -x "$(command -v snap)" ] && echo "== Snap ==" && sudo snap refresh
+    if [ -x "$(command -v apt)" ]; then
+      echo "== APT ==" && sudo apt update && sudo apt upgrade -y
+    elif [ -x "$(command -v dnf)" ]; then
+      echo "== DNF ==" && sudo dnf upgrade -y
+    elif [ -x "$(command -v pacman)" ]; then
+      echo "== Pacman ==" && sudo pacman -Syu
+    else
+      echo "Nie wykryto znanego menedżera pakietów."
+    fi
+  } 2>&1 | tee "$LOGFILE"
+}
