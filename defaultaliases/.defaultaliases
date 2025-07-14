@@ -24,6 +24,12 @@ upgrade() {
       echo "== DNF ==" && sudo dnf upgrade -y
     elif [ -x "$(command -v pacman)" ]; then
       echo "== Pacman ==" && sudo pacman -Syu
+    elif [ -x "$(command -v zypper)" ]; then
+      echo "== Zypper ==" && sudo zypper dup
+    elif [ -x "$(command -v ujust)" ]; then
+      echo "== Ujust ==" && ujust update
+    elif [[ -x "$(command -v rpm-ostree)" && ! -x "$(command -v ujust)" ]]; then
+      echo "== rpm-ostree ==" && rpmostree --upgrade
     else
       echo "Nie wykryto znanego menedżera pakietów."
     fi
