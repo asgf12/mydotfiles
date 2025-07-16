@@ -1,3 +1,4 @@
+alias brc=". ~/.bashrc"
 alias ls="ls --color=auto"
 alias cp="cp -i"
 alias rm="rm -i"
@@ -17,7 +18,7 @@ alias gpm='git push --repo=git@github.com:asgf12/mydotfiles.git'
 upgrade() {
   LOGFILE="$HOME/.local/log/update_$(date +%F_%H-%M-%S).log"
   {
-    [ -x "$(command -v flatpak)" ] && echo "== Flatpak ==" && sudo flatpak update
+    [ -x "$(command -v flatpak)" ] && echo "== Flatpak ==" && sudo flatpak update -y
     [ -x "$(command -v snap)" ] && echo "== Snap ==" && sudo snap refresh
     if [ -x "$(command -v apt)" ]; then
       echo "== APT ==" && sudo apt update && sudo apt upgrade -y
@@ -30,7 +31,7 @@ upgrade() {
     elif [ -x "$(command -v ujust)" ]; then
       echo "== Ujust ==" && ujust update
     elif [[ -x "$(command -v rpm-ostree)" && ! -x "$(command -v ujust)" ]]; then
-      echo "== rpm-ostree ==" && rpmostree --upgrade
+      echo "== rpm-ostree ==" && rpm-ostree upgrade
     else
       echo "Nie wykryto znanego menedżera pakietów."
     fi
