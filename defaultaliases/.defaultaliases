@@ -18,7 +18,7 @@ alias gr='git restore'
 alias gpm='git push --repo=git@github.com:asgf12/mydotfiles.git'
 
 
-dup() {
+upgrade() {
   LOGFILE="$HOME/.local/log/update_$(date +%B%Y).log"
   {
     printf "StartTime:\n$(date +%F_%T)\n"
