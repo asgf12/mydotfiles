@@ -21,7 +21,7 @@ alias gpm='git push --repo=git@github.com:asgf12/mydotfiles.git'
 upgrade() {
   LOGFILE="$HOME/.local/log/update_$(date +%B%Y).log"
   {
-    printf "StartTime:\n$(date +%F_%T)\n" ;
+    printf "\nStartTime:\n$(date +%F_%T)\n\n" ;
     [ -x "$(command -v flatpak)" ] && echo "== Flatpak ==" && sudo flatpak update -y
     [ -x "$(command -v snap)" ] && echo "== Snap ==" && sudo snap refresh
     if [ -x "$(command -v apt)" ]; then
@@ -43,6 +43,6 @@ upgrade() {
     else
       echo "Nie wykryto znanego menedżera pakietów."
     fi
-    printf "Finished $(date +%T\n\n)" ;
+    printf "Finished $(date +%T)\n" ;
   } 2>&1 | tee -a "$LOGFILE"
 }
