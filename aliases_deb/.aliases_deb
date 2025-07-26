@@ -1,1 +1,0 @@
-[[ -x $(command -v "flatpak") ]] && alias dup="sudo flatpak update && sudo apt update && sudo apt upgrade -y" || alias dup="sudo apt update && sudo apt upgrade -y"
