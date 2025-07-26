@@ -4,6 +4,8 @@
 alias hyp="nvim ~/.config/hypr/hyprland.conf"
 alias brc=". ~/.bashrc"
 alias ls="ls --color=auto"
+alias ll="ls -lAF --color=auto"
+alias la="ls -la --color=auto"
 alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
