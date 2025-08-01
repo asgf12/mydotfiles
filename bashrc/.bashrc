@@ -1,15 +1,14 @@
+[[ -f ~/.local/log ]] || mkdir -p $HOME/.local/log &&  mkdir -p $HOME/.local/bin &&  mkdir -p $HOME/.local/bak
 [[ -f ~/.defaultaliases ]] && . ~/.defaultaliases
-[[ -f ~/.aliases_nix ]] && . ~/.aliases_nix
-[[ -f ~/.aliases_alp ]] && . ~/.aliases_alp
 
-[[ -f ~/.local/log ]] || mkdir -p $HOME/.local/log && [[ -f ~/.local/bin ]] || mkdir -p $HOME/.local/bin
+[[ -f /etc/bashrc ]] && . /etc/bashrc
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
 
 #set -o vi
 
 [[ -x $(command -v fzf) ]] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
-[[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vim'
+[[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vi'
 [[ -x $(command -v starship) ]] && eval "$(starship init bash --print-full-init)"
 
 export PATH="~/.local/bin:$PATH"
@@ -22,8 +21,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
-
