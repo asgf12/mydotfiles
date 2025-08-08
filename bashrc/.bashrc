@@ -1,5 +1,5 @@
 [[ -f ~/.local/log ]] || mkdir -p $HOME/.local/log &&  mkdir -p $HOME/.local/bin &&  mkdir -p $HOME/.local/bak
-[[ -f ~/.defaultaliases ]] && . ~/.defaultaliases
+[[ -f ~/.aliases]] && . ~/.aliases
 
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
