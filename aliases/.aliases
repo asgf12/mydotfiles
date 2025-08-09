@@ -1,6 +1,7 @@
 [[ -x $(command -v sudo) || $USER = "root" ]] ||  alias sudo=""
 [[ -x $(command -v nixos-generate-config) ]] && alias conf="sudo nvim /etc/nixos/configuration.nix" && alias cleanup="sudo nix-collect-garbage -d --delete-older-than 20d"
 [[ -x $(command -v apk) ]] && alias sudo="doas" && alias ain="doas apk add" && alias reboot="doas reboot" && alias poweroff="doas poweroff"
+[[ -x $(command -v fdfind) ]] && alias fd="fdfind"
 alias hyp="nvim ~/.config/hypr/hyprland.conf"
 alias brc=". ~/.bashrc"
 alias ls="ls --color=auto"
