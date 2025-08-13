@@ -17,15 +17,15 @@ echo $name:100000:65536 >> /etc/subgid
 [[ -f $HOME/.local/bin ]] || mkdir -p $HOME/.local/bin
 ln -s /bin/screenfetch $HOME/.local/bin/fastfetch
 
-[[ -d $HOME/mydotfiles ]] || cd && git clone https://github.com/asgf12/mydotfies.git
-if [ $? -ne 0 ]; then
+[[ -d $HOME/mydotfiles ]] || cd $HOME && git clone http://github.com/asgf12/mydotfiles.git
+if [[ -d $HOME/mydotfiles && ! -h $HOME/.bashrc ]]; then
 	mkdir -p $HOME/.local/bak
-	[[ -f $HOME/.bashrc ]] || mv $HOME/.bashrc $HOME/.local/bak/
-	[[ -f $HOME/.bash_profile ]] || mv $HOME/.bash_profie $HOME/.local/bak/
-	[[ -f $HOME/.aliases ]] || mv $HOME/.aliases $HOME/.local/bak/
-	[[ -f $HOME/.bash_aliases ]] || mv $HOME/.bash_aliases $HOME/.local/bak/
-	[[ -d $HOME/.config/tmux ]] || mv $HOME/.config/tmux $HOME/.local/bak/
-	[[ -d $HOME/.config/containers ]] || mv $HOME/.config/containers $HOME/.local/bak/
+	[[ -f $HOME/.bashrc ]] && mv $HOME/.bashrc $HOME/.local/bak/
+	[[ -f $HOME/.bash_profile ]] && mv $HOME/.bash_profie $HOME/.local/bak/
+	[[ -f $HOME/.aliases ]] && mv $HOME/.aliases $HOME/.local/bak/
+	[[ -f $HOME/.bash_aliases ]] && mv $HOME/.bash_aliases $HOME/.local/bak/
+	[[ -d $HOME/.config/tmux ]] && mv $HOME/.config/tmux $HOME/.local/bak/
+	[[ -d $HOME/.config/containers ]] && mv $HOME/.config/containers $HOME/.local/bak/
 fi
 
 [[ -h $HOME/.bashrc ]] || cd $HOME/mydotfiles && stow bashrc podman tmux aliases && echo -e 'basic config symlinked\nsourcing not suported\nrestart or\n. $HOME/.bashrc'
