@@ -8,7 +8,7 @@
 
 [[ -x $(command -v fzf) ]] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
-[[ -x $(command -v nvim) ]] && export EDITOR='nvim' || export EDITOR='vi'
+[[ -x $(command -v vim) ]] && export EDITOR='vim' || export EDITOR='vi'
 [[ -x $(command -v starship) ]] && eval "$(starship init bash --print-full-init)"
 
 export PATH="~/.local/bin:$PATH"

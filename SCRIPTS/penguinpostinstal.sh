@@ -2,13 +2,16 @@
 
 # My options and base config for chromeOS linux container
 # runas sudo only
+# checked deb 12/13
 
-pkg=(fd-find fzf gcc git grep gzip man mawk screenfetch neovim podman python3 tldr tmux unzip vim wget xclip curl stow bat 7zip jq btop)
+pkg=(aria2 fd-find fzf gcc git grep gzip man mawk screenfetch neovim podman python3 pipx tmux unzip vim wget xclip curl stow bat 7zip jq btop)
 
 apt update && apt upgrade -y && apt install ${pkg[@]}
 if [ $? -ne 0 ]; then
 	echo 'interrupted';exit 1
 fi
+
+pipx install tldr
 
 name="$(grep 1000 /etc/passwd | cut -d: -f1)"
 echo $name:100000:65536 >> /etc/subuid
