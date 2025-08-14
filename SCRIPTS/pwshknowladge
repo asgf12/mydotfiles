@@ -1,0 +1,189 @@
+3. Usuwasz polityki
+C:\Windows\System32\Groups\Machine\*
+4. Gpupdate
+
+Jira jql
+jql project = SD AND resolution = Unresolved ORDER BY priority DESC, updated DESC
+assignee = currentUser() AND resolution = Unresolved order by updated DESC
+netsh interface ipv4 set dnsservers name=Wi-Fi source=dhcp
+
+DSAC centrum admin ad
+dsa zwykłe ad
+gsv fbsworker -computername $hosti | select status,starttype
+gsv fbsworker -ComputerName $hosti | Set-Service -startuptype Manual -passthru | spsv
+
+Check uninstall Komputer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{
+Get-ItemProperty hklm:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\* | select displayname,uninstallstring
+
+hklm:\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList
+
+Get-ADUser $name -Properties LockedOut | select LockedOut
+Search-ADAccount -Locked | Select Name, LockedOut, LastLogonDate
+Unlock-ADAccount -Identity
+$pass = Read-Host 'What is your password?' -AsSecureString
+Get-WmiObject win32_physicalmedIA
+
+$PSVersionTable.PSVersion
+get-module -listavailable
+get-command -verb -noun -module
+get-help get-physicaldisk -parametre parametr -full -online
+$env:PSModulePath -split ";"
+get-aduser -name -properties lastlogondate,city
+-eq to samo, -ceq (case sensitive) bierze pod uwagę duże litery też, "abc" -eq "Abc" true, "abc" -ceq "ABC" false
+
+where-object , ? , where nie da się porównać wielu, trzeba użyć $PSItem / $_
+get- | where -filter {($PSItem.Status -eq 'Running') -and ($PSItem.Starttype -eq 'automatic')}
+get-member właściwości i metody
+format-list -property
+get-aduser -filter * -properties department | where department -like "*HR*" bez properties nie pokaże 
+Get-ADUser -filter "City -like 'Katowice'"
+select-object -property p1.p2.pn -first/last/skip
+format-table/list/wide = ft,fl,fw -wrap (zawijanie)
+fw -column ilość
+fl -groupby status
+sort -descending
+| foreach-object -membername = | % -begin {get-date} -process {$_.method(); $_.property}
+1..10 | % {get-random} wygeneruj random dla każdej od 1 - 10
+cd /temp;
+zmienne $true, $False, $null, $error[0] [indeks]
+dir variable: można wrzucić skrypt w ścieżkę profile, aby przy każdej sesji się ładowały dane zmienne
+$error.clear()
+Convert np. tostring(), toint32()
+Write-host "Tekst $zmienna" == print
+$hosting = read-host "Podaj host do zainstalowania Lenovo Diagnostics i ściągnięcia S/N dysku = "
+"wartosc`$num" traktuj zmienną jako str
+$erroractionpreference = continue/silentlycontinue
+$dzisiaj = get-date
+$poczmsc = $dzisiaj.adddays(-$dzisiaj.day+1) początek miesiąca
+(get-date).datetimeformat istotne nawiasy w takim przypadku
+
+select @{
+n/name/label/l='ComputerName';
+e={$_.name}
+}| podmiana nazwy parametru z computername na name, aby powiązać w innym cmdlet,
+który akceptuje z pipeline inny typ. Tablica hashowa
+Formatowanie 2 liczby po przecinku e={'{0:N2}' -f ($_.size / 1GB)}}
+0 pierwsze po -f :n2 2 cyfry po przecinku
+select -expandproperty name -unique (wyciągnięcie pojedynczych string)
+get-process -computername (get-adcomputer -filter * | select -expandproperty name)
+początki remotingu: invoke-command -ComputerName psf-dc1,psf-cl1 -ScriptBlock {get-process}
+
+wyrzucenie do pliku: out-file costam.txt
+> nadpisanie liku jak istnieje (domyślne) >> (-append) dopisanie do pliku
+ConvertTo-CSV, CliXML, JSON, HTML
+Export-CSV, CliXML
+out-host -paging more controll on-screen output
+out-printer na domyślną drukarkę
+out-gridview w osobnym oknie + filter&sort, -outputmode single/multiple wrzucenie do potoku, czeka na wybór.
+import-csv robi customobject tabela, dziala indeks i $_.nazwa_kolumny
+
+ad:
+test-computersecurechannel -repair
+reset-computermachinepassword
+$cred = get-credential -message -username
+$Pass = read-host "Podaj haslo" -assecurestring
+
+[array]$abc
+
+Get-childitem "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\"
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select DisplayName | Sort DisplayName | Format-Table -HideTableHeaders 
+(Get-Date) - (Get-CimInstance Win32_OperatingSystem -ComputerName Remote_Computer).LastBootupTime (Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootupTime 
+Get-WMIObject win32_physicalmedia | select SerialNumber, pscomputername
+
+$hosti = 
+Get-WmiObject -Class Win32_Product -computername $hosti | select name, version #zainstalowane programy 
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select DisplayName | Sort DisplayName | Format-Table -HideTableHeaders 
+(Get-Date) - (Get-CimInstance Win32_OperatingSystem -ComputerName Remote_Computer).LastBootupTime (Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootupTime 
+Get-WMIObject win32_physicalmedia | select SerialNumber, pscomputername
+get-CIMinstance win32_diskdrive
+
+Search-ADAccount -lockedout
+
+Set-ExecutionPolicy unrestricted
+default: Restricted
+
+[Environment]::SetEnvironmentVariable("MyTestVariable", "MyTestValue", [System.EnvironmentVariableTarget]::Machine)
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\bin", "Machine")
+
+cd /temp;.\ldiag_4.47.1_windows_x64.exe /verysilent
+cd "C:\Program Files\Lenovo\Lenovo Diagnostics Tool";ls LenovoDiagnosticsCLI.exe
+.\LenovoDiagnosticsCLI.exe -Mstorage -D;hostname
+
+wmic bios get serialnumber 
+Get-WmiObject -Class "Win32_Physicalmedia" | Select-Object SerialNumber
+
+PsExec.exe \\host sc config remoteregistry start=
+boot
+system
+auto
+demand
+delayed-auto
+disabled
+PsExec.exe \\$hosti sc start remoteregistry
+
+sekcje CMD można by rozbudować o bardziej przydatne komendy
+wszechpotężny: sfc /scannow
+wmic /node:PL0 product get name, version
+systeminfo /s PL0 | find /i "Boot Time"
+netsh winhttp show proxy
+netsh winhttp reset proxy
+DISM.exe /Online /Cleanup-image /Restorehealth
+rundll32.exe keymgr.dll, KRShowKeyMgr
+query user /server:(nazwa hosta)
+shutdown -r -f -m \\PL0
+EventVwr $hosti
+sc queryex type=service status=all
+I te wszystkie standardowe phkrzy pomocy zdalnej:
+mmc.exe
+lusrmgr.msc /computer=$hosti
+ncpa.cpl
+
+lusrmgr.msc 
+gpedit.msc 
+devmgmt.msc 
+
+inetcpl.cpl 
+appwiz.cpl 
+sysdm.cpl
+
+windirstat1_1_2_setup.exe /S
+
+powershell.exe -executionPolicy Bypass -NoLogo -NoProfile C:\Temp\wal.ps1
+
+ls | Select-Object Name, @{Name="MegaBytes";Expression={$_.Length / 1MB}}
+
+ls | Select-Object Name, @{Name="GigaBytes";Expression={$_.Length / 1GB}}
+
+
+msiexec /i "pdfsam-basic-5.3.0-windows-x64.msi" /qn /norestart CHECK_FOR_UPDATES=false DONATE_NOTIFICATION=false SKIPTHANKSPAGE=Yes
+
+status in (Resolved, Closed, Odrzucone, Zamknięte, Zrealizowano, Wykonane, "Odrzucone / Brak możliwości realizacji", Rozwiązane, Anulowano, Zamknięty, Zrealizowany, Zakończone) AND updated >= 2024-09-30 AND updated <= 2024-10-04 AND assignee in (currentUser()) order by created DESC
+Get-ADUser -Filter 'office -like "Departament Wyceny i Procesów Operacyjny*" -and enabled -eq "true"' -Properties * | select cn
+
+C:\Windows\System32\Drivers\etc\hosts
+python-3.9.x.exe /quiet InstallAllUsers=1 PrependPath=1
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList
+
+#sos
+$command = 'icacls "C:\ORACLE\Forms" /grant "Użytkownicy:(OI)(CI)RX" /T'
+$bytes = [System.Text.Encoding]::Unicode.GetBytes($command)
+$encodedCommand = [Convert]::ToBase64String($bytes)
+
+psexec \\$hosti powershell.exe -EncodedCommand $encodedCommand
+
+$command = 'icacls "C:\ORACLE\BIToolsHome_1" /grant "Użytkownicy:(OI)(CI)RX" /T'
+$bytes = [System.Text.Encoding]::Unicode.GetBytes($command)
+$encodedCommand = [Convert]::ToBase64String($bytes)
+
+msiexec.exe /i node-v0.10.23-x64.msi INSTALLDIR="C:\Tools\NodeJS" /quiet
+
+New-Item -ItemType SymbolicLink -Path C:\Users\Public\Desktop\sqldeveloper.lnk -Value C:\sqldeveloper\sqldeveloper.exe
+
+New-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel\ -Name "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" -PropertyType DWORD -Value 0
+
+tar Oxf NAZWA_Archiwum CopyLog.Text
+
+$pin = Read-Host 'Gib pin plz' -AsSecureString
+$SecureString = ConvertTo-SecureString "$pin" -AsPlainText -Force
+Enable-BitLocker -MountPoint "C:" -Pin $SecureString -TPMandPinProtector
