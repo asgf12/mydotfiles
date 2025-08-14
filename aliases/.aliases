@@ -48,6 +48,6 @@ upgrade() {
     else
       echo "Nie wykryto znanego menedżera pakietów."
     fi
-    printf "Finished $(date +%T)\n" ;
+    printf "\nEndTime:\n$(date +%F_%T)\n\n" ;
   } 2>&1 | tee -a "$LOGFILE"
 }
