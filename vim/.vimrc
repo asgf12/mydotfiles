@@ -8,7 +8,7 @@ set regexpengine=0
 set ai "Auto indent
 set si "Smart indent
 map 0 ^
-
+set guicursor=n-v-c:block,i:ver25
 
 " Don't try to be vi compatible
 set nocompatible
