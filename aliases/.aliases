@@ -3,7 +3,7 @@
 [[ -x $(command -v apk) ]] && alias sudo="doas" && alias ain="doas apk add" && alias reboot="doas reboot" && alias poweroff="doas poweroff"
 [[ -x $(command -v apt) ]] && alias forcedup="sudo apt update && apt list --upgradable 2>&1 | awk -F'/' 'NR>4{print $1}'| xargs sudo apt install -y"
 [[ -x $(command -v fdfind) ]] && alias fd="fdfind"
-alias hyp="nvim ~/.config/hypr/hyprland.conf"
+alias hyp="vim ~/.config/hypr/hyprland.conf"
 alias brc=". ~/.bashrc"
 alias ls="ls --color=auto"
 alias ll="ls -lAF --color=auto"
@@ -12,11 +12,14 @@ alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias frogssh="ssh frog@frog02.mikr.us -p 10613"
+alias ubuserv="ssh asgf12@192.168.0.200"
 alias ta="tmux attach"
-alias grep='grep --color=auto'
+alias tl="tmux list-sessions"
+alias grep="grep --color=auto"
 alias vnv='nvim $(fzf -m --preview="bat --color=always {}")'
 alias vv='vim $(fzf -m --preview="bat --color=always {}")'
 alias ga='git add *'
+alias gs='git status'
 alias gc='git commit -m'
 alias gp='git pull'
 alias gpp='git pull --ff-only'

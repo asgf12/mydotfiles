@@ -1,3 +1,15 @@
+" Show line numbers + other mine
+set number
+set relativenumber
+set mouse=a
+set cmdheight=1
+set lazyredraw
+set regexpengine=0
+set ai "Auto indent
+set si "Smart indent
+map 0 ^
+
+
 " Don't try to be vi compatible
 set nocompatible
 
@@ -18,10 +30,6 @@ let mapleader = " "
 
 " Security
 set modelines=0
-
-" Show line numbers
-set number
-set relativenumber
 
 " Show file stats
 set ruler
