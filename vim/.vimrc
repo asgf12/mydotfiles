@@ -1,3 +1,5 @@
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 " Show line numbers + other mine
 set number
 set relativenumber
@@ -9,9 +11,28 @@ set ai "Auto indent
 set si "Smart indent
 map 0 ^
 set guicursor=n-v-c:block,i:ver25
+map Y y$
+map <C-c> "*y
+map <leader><tab> :bNext<CR>
+map <leader>x :bdelete<CR>
+map <leader>t :terminal<CR>
+map <leader>e :e .<CR>
+map <leader>b :enew<CR>
+map <leader>k {w0
+map <leader>j }b0
 
 " Don't try to be vi compatible
 set nocompatible
+
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+map <leader><space> :let @/=''<cr> " clear search
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
@@ -23,10 +44,6 @@ syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-nnoremap <SPACE> <Nop>
-let mapleader = " "
 
 " Security
 set modelines=0
@@ -73,16 +90,6 @@ set laststatus=2
 set showmode
 set showcmd
 
-" Searching
-nnoremap / /\v
-vnoremap / /\v
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set showmatch
-map <leader><space> :let @/=''<cr> " clear search
-
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
@@ -98,7 +105,7 @@ set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
+" map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Color scheme (terminal)
 set t_Co=256
