@@ -16,11 +16,22 @@ map <C-c> "*y
 map <leader><tab> :bNext<CR>
 map <leader>x :bdelete<CR>
 map <leader>t :terminal<CR>
-map <leader>e :e .<CR>
+map <leader>E :e .<CR>
+map <leader>e :Ex<CR>
 map <leader>b :enew<CR>
 map <leader>k {w0
 map <leader>j }b0
+set autoread
+nmap <leader>w :w!<cr>
+map <C-d> <C-d>zz
+map <C-u> <C-u>zz
+set wildmenu
+set showmatch
+set lazyredraw
+map <leader>z :e ~/buffer.md<cr>
 
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " Don't try to be vi compatible
 set nocompatible
 
