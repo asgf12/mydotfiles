@@ -2,6 +2,7 @@
 [[ -x $(command -v nixos-generate-config) ]] && alias conf="sudo vim /etc/nixos/configuration.nix" && alias cleanup="sudo nix-collect-garbage -d --delete-older-than 20d"
 [[ -x $(command -v apk) ]] && alias sudo="doas" && alias ain="doas apk add" && alias reboot="doas reboot" && alias poweroff="doas poweroff"
 [[ -x $(command -v apt) ]] && alias forcedup="sudo apt update && apt list --upgradable 2>&1 | awk -F'/' 'NR>4{print $1}'| xargs sudo apt install -y"
+[[ -x $(command -v xbps-install) ]] && alias voidin="sudo xbps-install -S" && alias voidse="xbps-query -s"
 [[ -x $(command -v fdfind) ]] && alias fd="fdfind"
 alias hyp="vim ~/.config/hypr/hyprland.conf"
 alias brc=". ~/.bashrc"
@@ -50,6 +51,8 @@ upgrade() {
       echo "== APK ==" && doas apk update && doas apk upgrade
     elif [ -x "$(command -v nixos-rebuild)" ]; then
       echo "== NIX ==" && sudo nixos-rebuild switch --upgrade
+    elif [ -x "$(command -v xbps-install)" ]; then
+      echo "== Void == && sudo xbps-install -Syu
     else
       echo "Nie wykryto znanego menedżera pakietów."
     fi
