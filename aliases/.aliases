@@ -52,7 +52,7 @@ upgrade() {
     elif [ -x "$(command -v nixos-rebuild)" ]; then
       echo "== NIX ==" && sudo nixos-rebuild switch --upgrade
     elif [ -x "$(command -v xbps-install)" ]; then
-      echo "== Void == && sudo xbps-install -Syu"
+      echo "== Void ==" && sudo xbps-install -Syu
     else
       echo "Nie wykryto znanego menedżera pakietów."
     fi
