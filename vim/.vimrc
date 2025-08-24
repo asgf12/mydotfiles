@@ -33,7 +33,7 @@ map <leader>z :e ~/buffer.md<cr>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " Don't try to be vi compatible
-set nocompatible
+" set nocompatible
 
 " Searching
 nnoremap / /\v
@@ -46,7 +46,7 @@ set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
 " Helps force plugins to load correctly when it is turned back on below
-filetype off
+" filetype off
 
 " TODO: Load plugins here (pathogen or vundle)
 
@@ -54,7 +54,7 @@ filetype off
 syntax on
 
 " For plugins to load correctly
-filetype plugin indent on
+" filetype plugin indent on
 
 " Security
 set modelines=0
@@ -69,8 +69,8 @@ set visualbell
 set encoding=utf-8
 
 " Whitespace
-set wrap
-set textwidth=79
+" set wrap
+" set textwidth=79
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
