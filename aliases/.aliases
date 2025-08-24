@@ -5,6 +5,7 @@
 [[ -x $(command -v xbps-install) ]] && alias voidin="sudo xbps-install -S" && alias voidse="xbps-query -s"
 [[ -x $(command -v fdfind) ]] && alias fd="fdfind"
 alias hyp="vim ~/.config/hypr/hyprland.conf"
+alias lastupg='tail -n 4 "$(find ~/.local/log/ -maxdepth 1 -name "*.log" -exec ls -t1 {} + | awk 'NR==1')"'
 alias brc=". ~/.bashrc"
 alias ls="ls --color=auto"
 alias ll="ls -lAF --color=auto"
