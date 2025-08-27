@@ -141,6 +141,9 @@ screens = [
                 # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Battery(
+                format='{char} {percent:2.0%}'
+                ),
                 widget.QuickExit(),
             ],
             24,
