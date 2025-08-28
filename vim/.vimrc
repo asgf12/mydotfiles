@@ -10,9 +10,10 @@ set regexpengine=0
 set ai "Auto indent
 set si "Smart indent
 map 0 ^
-set guicursor=n-v-c:block,i:ver25
+" set guicursor=n-v-c:block,i:ver25
 map Y y$
 map <C-c> "*y
+nnoremap <leader>c :call system("wl-copy", @")<CR> 
 map <leader><tab> :bNext<CR>
 map <leader>x :bdelete<CR>
 map <leader>t :terminal<CR>
