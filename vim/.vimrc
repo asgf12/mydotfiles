@@ -29,7 +29,11 @@ map <C-u> <C-u>zz
 set wildmenu
 set showmatch
 set lazyredraw
-map <leader>z :e ~/buffer.md<cr>
+map <leader>z :e ~/.buffer.md<cr>
+set mat=2
+set novisualbell
+set background=dark
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -44,7 +48,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader><space> :let @/=''<cr> " clear search
+map <leader><CR> :let @/=''<cr> " clear search
 
 " Helps force plugins to load correctly when it is turned back on below
 " filetype off

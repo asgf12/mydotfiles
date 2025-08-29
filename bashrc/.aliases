@@ -21,7 +21,7 @@ alias tl="tmux list-sessions"
 alias grep="grep --color=auto"
 alias vnv='nvim $(fzf -m --preview="bat --color=always {}")'
 alias vv='vim $(fzf -m --preview="bat --color=always {}")'
-alias ga='git add *'
+alias ga='git add .'
 alias gs='git status'
 alias gc='git commit -m'
 alias gp='git pull'
