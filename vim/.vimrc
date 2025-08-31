@@ -1,3 +1,9 @@
+function! DoSomethingIfNoArgs()
+    if argc() == 0
+        :e ~/.buffer.md
+    endif
+endfunction
+autocmd VimEnter * call DoSomethingIfNoArgs()
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 " Show line numbers + other mine
