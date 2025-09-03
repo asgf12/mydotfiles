@@ -3,6 +3,7 @@ function! DoSomethingIfNoArgs()
         :e ~/.buffer.md
     endif
 endfunction
+
 autocmd VimEnter * call DoSomethingIfNoArgs()
 nnoremap <SPACE> <Nop>
 let mapleader = " "
@@ -19,7 +20,7 @@ map 0 ^
 " set guicursor=n-v-c:block,i:ver25
 map Y y$
 map <C-c> "*y
-nnoremap <leader>c :call system("wl-copy", @")<CR> 
+nnoremap <leader>c :call system("wl-copy", @")<CR>
 map <leader><tab> :bNext<CR>
 map <leader>x :bdelete<CR>
 map <leader>t :terminal<CR>
@@ -40,6 +41,8 @@ set mat=2
 set novisualbell
 set background=dark
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
