@@ -44,14 +44,14 @@ window#waybar.solo {
     color: rgba(33, 164, 223, 1);
 }
 
-#mode, 
-#battery, 
-#cpu, 
-#memory, 
-#network, 
+#mode,
+#battery,
+#cpu,
+#memory,
+#network,
 #bluetooth,
-#pulseaudio, 
-#idle_inhibitor, 
+#pulseaudio,
+#idle_inhibitor,
 #temperature,
 #custom-layout,
 #backlight {
