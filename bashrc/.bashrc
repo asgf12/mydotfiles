@@ -1,10 +1,7 @@
-[[ -f ~/.local/log ]] || mkdir -p $HOME/.local/log &&  mkdir -p $HOME/.local/bin &&  mkdir -p $HOME/.local/bak
-[[ -f ~/.aliases ]] && . ~/.aliases
-
 [[ -f /etc/bashrc ]] && . /etc/bashrc
+unalias -a && [[ -f ~/.aliases ]] && . ~/.aliases
+mkdir -p $HOME/.local/{log,bin,bak}
 [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]] && . ~/.nix-profile/etc/profile.d/nix.sh
-
-#set -o vi
 
 [[ -x $(command -v fzf) ]] && eval "$(fzf --bash)"
 [[ -x $(command -v fastfetch) ]] && fastfetch
