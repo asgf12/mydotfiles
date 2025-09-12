@@ -27,6 +27,7 @@ alias gc='git commit -a'
 alias gp='git pull'
 alias gpp='git pull --ff-only'
 alias gr='git restore'
+alias gl='git log --all --graph'
 alias gpm='git push --repo=git@github.com:asgf12/mydotfiles.git'
 alias dot='cd ~/mydotfiles'
 
