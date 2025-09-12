@@ -23,142 +23,144 @@ fi
 #
 # Author: Hiroshi Krashiki(Krashikiworks)
 # released under MIT License, see LICENSE
-
 # Colors
-readonly BLACK=$(tput setaf 0)
-readonly RED=$(tput setaf 1)
-readonly GREEN=$(tput setaf 2)
-readonly YELLOW=$(tput setaf 3)
-readonly BLUE=$(tput setaf 4)
-readonly MAGENTA=$(tput setaf 5)
-readonly CYAN=$(tput setaf 6)
-readonly WHITE=$(tput setaf 7)
-readonly BRIGHT_BLACK=$(tput setaf 8)
-readonly BRIGHT_RED=$(tput setaf 9)
-readonly BRIGHT_GREEN=$(tput setaf 10)
-readonly BRIGHT_YELLOW=$(tput setaf 11)
-readonly BRIGHT_BLUE=$(tput setaf 12)
-readonly BRIGHT_MAGENTA=$(tput setaf 13)
-readonly BRIGHT_CYAN=$(tput setaf 14)
-readonly BRIGHT_WHITE=$(tput setaf 15)
+# Using standard ANSI escape codes instead of tput
+readonly RESET=$'\e[0m'
 
-readonly RESET=$(tput sgr0)
+# Regular colors
+readonly BLACK=$'\e[30m'
+readonly RED=$'\e[31m'
+readonly GREEN=$'\e[32m'
+readonly YELLOW=$'\e[33m'
+readonly BLUE=$'\e[34m'
+readonly MAGENTA=$'\e[35m'
+readonly CYAN=$'\e[36m'
+readonly WHITE=$'\e[37m'
 
-# symbols
+# Bright colors
+readonly BRIGHT_BLACK=$'\e[90m'
+readonly BRIGHT_RED=$'\e[91m'
+readonly BRIGHT_GREEN=$'\e[92m'
+readonly BRIGHT_YELLOW=$'\e[93m'
+readonly BRIGHT_BLUE=$'\e[94m'
+readonly BRIGHT_MAGENTA=$'\e[95m'
+readonly BRIGHT_CYAN=$'\e[96m'
+readonly BRIGHT_WHITE=$'\e[97m'
+
+# Symbols
 pure_prompt_symbol="❯"
 pure_symbol_unpulled="⇣"
 pure_symbol_unpushed="⇡"
 pure_symbol_dirty="*"
-# pure_git_stash_symbol="≡"
 
-# if this value is true, remote status update will be async
+# Git status variables
 pure_git_async_update=false
 pure_git_raw_remote_status="+0 -0"
 
-
+# Function to get git remote status
 __pure_echo_git_remote_status() {
+    local remote_status
+    local unpulled_count unpushed_count
 
-	# get unpulled & unpushed status
-	if ${pure_git_async_update}; then
-		# do async
-		# FIXME: this async execution doesn't change pure_git_raw_remote_status. so remote status never changes in async mode
-		# FIXME: async mode takes as long as sync mode
-		pure_git_raw_remote_status=$(git status --porcelain=2 --branch | grep --only-matching --perl-regexp '\+\d+ \-\d+') &
-	else
-		# do sync
-		pure_git_raw_remote_status=$(git status --porcelain=2 --branch | grep --only-matching --perl-regexp '\+\d+ \-\d+')
-	fi
+    # Use `git status` and a `grep` pipeline to find the exact line
+    # with the push/pull numbers. This is more reliable than searching for `branch.upstream`.
+    remote_status=$(git status --porcelain=v2 --branch 2>/dev/null | grep -E '^# branch.ab')
+#    remote_status="${remote_status##*+}"
 
-	# shape raw status and check unpulled commit
-	local readonly UNPULLED=$(echo ${pure_git_raw_remote_status} | grep --only-matching --perl-regexp '\-\d')
-	if [[ ${UNPULLED} != "-0" ]]; then
-		pure_git_unpulled=true
-	else
-		pure_git_unpulled=false
-	fi
+    # Exit if no remote status line was found
+    if [[ -z "$remote_status" ]]; then
+        return
+    fi
 
-	# unpushed commit too
-	local readonly UNPUSHED=$(echo ${pure_git_raw_remote_status} | grep --only-matching --perl-regexp '\+\d')
-	if [[ ${UNPUSHED} != "+0" ]]; then
-		pure_git_unpushed=true
-	else
-		pure_git_unpushed=false
-	fi
+    # Use a regular expression to capture the numbers. This is the most reliable way.
+    # The regex `\+([0-9]+) -([0-9]+)` captures the two numbers.
+    if [[ "$remote_status" =~ \+([0-9]+)\ -([0-9]+) ]]; then
+        unpushed_count=${BASH_REMATCH[1]}
+        unpulled_count=${BASH_REMATCH[2]}
+    else
+        unpushed_count=0
+        unpulled_count=0
+    fi
 
-	# if unpulled -> ⇣
-	# if unpushed -> ⇡
-	# if both (branched from remote) -> ⇣⇡
-	if ${pure_git_unpulled}; then
+    # Check unpulled & unpushed status
+    pure_git_unpulled=false
+    pure_git_unpushed=false
 
-		if ${pure_git_unpushed}; then
-			echo "${RED}${pure_symbol_unpulled}${pure_symbol_unpushed}${RESET}"
-		else
-			echo "${BRIGHT_RED}${pure_symbol_unpulled}${RESET}"
-		fi
+    if [[ ${unpulled_count} -gt 0 ]]; then
+        pure_git_unpulled=true
+    fi
+    if [[ ${unpushed_count} -gt 0 ]]; then
+        pure_git_unpushed=true
+    fi
 
-	elif ${pure_git_unpushed}; then
-		echo "${BRIGHT_BLUE}${pure_symbol_unpushed}${RESET}"
-	fi
+    # Print the appropriate symbols
+    if ${pure_git_unpulled}; then
+        if ${pure_git_unpushed}; then
+            echo "${RED}${pure_symbol_unpulled}${pure_symbol_unpushed}${RESET}"
+        else
+            echo "${BRIGHT_RED}${pure_symbol_unpulled}${RESET}"
+        fi
+    elif ${pure_git_unpushed}; then
+        echo "${BRIGHT_BLUE}${pure_symbol_unpushed}${RESET}"
+    fi
 }
 
+# Function to update git status
 __pure_update_git_status() {
+    pure_git_status=""
 
-	local git_status=""
+    # Check if inside a git repository
+    if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == "true" ]]; then
+        local current_branch=$(git branch --show-current 2>/dev/null)
+        pure_git_status="${current_branch}"
 
-		# if current directory isn't git repository, skip this
-		if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == "true" ]]; then
+        # Check for dirty working tree
+        git diff-index --quiet HEAD -- || pure_git_status="${pure_git_status}${pure_symbol_dirty}"
 
-			git_status="$(git branch --show-current)"
+        # Color the status
+        pure_git_status="${BRIGHT_BLACK}${pure_git_status}${RESET}"
 
-			# check clean/dirty
-			git_status="${git_status}$(git diff --quiet || echo "${pure_symbol_dirty}")"
-
-			# coloring
-			git_status="${BRIGHT_BLACK}${git_status}${RESET}"
-
-			# if repository have no remote, skip this
-			if [[ -n $(git remote show) ]]; then
-				git_status="${git_status} $(__pure_echo_git_remote_status)"
-			fi
-		fi
-
-	pure_git_status=${git_status}
+        # Check if repository has a remote
+        if [[ -n $(git remote 2>/dev/null) ]]; then
+            pure_git_status="${pure_git_status} $(__pure_echo_git_remote_status)"
+        fi
+    fi
 }
 
-# if last command failed, change prompt color
+# Function to determine prompt color based on last command's exit code
 __pure_echo_prompt_color() {
-
-	if [[ $? = 0 ]]; then
-		echo ${pure_user_color}
-	else
-		echo ${RED}
-	fi
-
+    if [[ $? = 0 ]]; then
+        echo "${pure_user_color}"
+    else
+        echo "${RED}"
+    fi
 }
 
+# Update prompt color
 __pure_update_prompt_color() {
-	pure_prompt_color=$(__pure_echo_prompt_color)
+    pure_prompt_color=$(__pure_echo_prompt_color)
 }
 
-# if user is root, prompt is BRIGHT_YELLOW
+# Set user color based on UID
 case ${UID} in
-	0) pure_user_color=${BRIGHT_YELLOW} ;;
-	*) pure_user_color=${BRIGHT_MAGENTA} ;;
+    0) pure_user_color=${BRIGHT_YELLOW} ;;
+    *) pure_user_color=${BRIGHT_MAGENTA} ;;
 esac
 
-# if git isn't installed when shell launches, git integration isn't activated
-if [[ -n $(command -v git) ]]; then
-	PROMPT_COMMAND="__pure_update_git_status; ${PROMPT_COMMAND}"
+# Check if git is available and set PROMPT_COMMAND
+if command -v git &>/dev/null; then
+    PROMPT_COMMAND="__pure_update_git_status; ${PROMPT_COMMAND}"
 fi
 
 PROMPT_COMMAND="__pure_update_prompt_color; ${PROMPT_COMMAND}"
 
-
+# The issue with escape characters not being printed as strings is due to how Bash processes PS1.
+# The escape characters need to be enclosed in single quotes or escaped properly.
+# `\[` and `\]` are used to tell Bash not to count the characters inside them,
+# which prevents strange cursor behavior.
 readonly FIRST_LINE="${CYAN}\w \${pure_git_status}\n"
-# raw using of $ANY_COLOR (or $(tput setaf ***)) here causes a creepy bug when go back history with up arrow key
-# I couldn't find why it occurs
 readonly SECOND_LINE="\[\${pure_prompt_color}\]${pure_prompt_symbol}\[$RESET\] "
-PS1="\n"$(date +%T)" ${FIRST_LINE}${SECOND_LINE}"
+PS1="\[$(date +%T)\] ${FIRST_LINE}${SECOND_LINE}"
 
 # Multiline command
-PS2="\[$BLUE\]${prompt_symbol}\[$RESET\] "
+PS2="\[${BLUE}\]${pure_prompt_symbol}\[$RESET\] "
