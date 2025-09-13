@@ -160,7 +160,7 @@ PROMPT_COMMAND="__pure_update_prompt_color; ${PROMPT_COMMAND}"
 # which prevents strange cursor behavior.
 readonly FIRST_LINE="${CYAN}\w \${pure_git_status}\n"
 readonly SECOND_LINE="\[\${pure_prompt_color}\]${pure_prompt_symbol}\[$RESET\] "
-PS1="\[$(date +%T)\] ${FIRST_LINE}${SECOND_LINE}"
+PS1="\h \t ${FIRST_LINE}${SECOND_LINE}"
 
 # Multiline command
 PS2="\[${BLUE}\]${pure_prompt_symbol}\[$RESET\] "
