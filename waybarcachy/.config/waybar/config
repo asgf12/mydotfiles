@@ -13,7 +13,7 @@
     "margin-bottom": 0,
     "margin-right": 10,
 
-    "spacing": 5, // Gaps between modules (4px)
+    "spacing": 3, // Gaps between modules (4px)
 
     "modules-left": [
         //"custom/rofi",
@@ -26,7 +26,7 @@
     ],
     "modules-center": [
         //"hyprland/window"
-        "clock#date",
+        //"clock#date",
         "custom/weather"
         //"custom/gammastep"
     ],
@@ -38,9 +38,11 @@
         "battery",
         //"pulseaudio",
         "wireplumber",
-        "custom/screenshot_t",
-        "tray",
-        "custom/power"
+        //"custom/screenshot_t",
+        //"tray",
+        //"custom/power"
+        "clock",
+        "network"
     ],
 
 
@@ -165,26 +167,26 @@
         },
         "tooltip": "true"
     },
-    "custom/weather": {
-        "format": "{}",
-        "format-alt": "{alt}: {}",
-        "format-alt-click": "click-right",
-        "interval": 3600,
-        "exec": "curl -s 'https://wttr.in/?format=1'",
-        //"return-type": "json",
-        //"exec": "~/.config/waybar/modules/weather.sh",
-        "exec-if": "ping wttr.in -c1"
-    },
-    "custom/pacman": {
-        "format": "<big>􏆲</big>  {}",
-        "interval": 3600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "alacritty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
-        "signal": 8,
-        "max-length": 5,
-        "min-length": 3
-    },
+    //"custom/weather": {
+//        "format": "{}",
+        //"format-alt": "{alt}: {}",
+        //"format-alt-click": "click-right",
+        //"interval": 3600,
+        //"exec": "curl -s 'https://wttr.in/?format=1'",
+        ////"return-type": "json",
+        ////"exec": "~/.config/waybar/modules/weather.sh",
+        //"exec-if": "ping wttr.in -c1"
+    //},
+    //"custom/pacman": {
+        //"format": "<big>􏆲</big>  {}",
+        //"interval": 3600,                     // every hour
+        //"exec": "checkupdates | wc -l",       // # of updates
+        //"exec-if": "exit 0",                  // always run; consider advanced run conditions
+        //"on-click": "alacritty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
+        //"signal": 8,
+        //"max-length": 5,
+        //"min-length": 3
+    //},
 
 "custom/spotify": {
     "exec": "~/.config/waybar/mediaplayer.py --player spotify",
