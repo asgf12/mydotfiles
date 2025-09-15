@@ -1,7 +1,7 @@
 # Documents\WindowsPowerShell\Profile.ps1
 function prompt {"`n$(Get-Date) $(Get-Location)`n> "}
 Set-PSReadlineKeyHandler -Chord Ctrl+a -Function BeginningOfLine
-Set-PSReadlineKeyHandler -Chord Ctrl+p -Function HistorySearchBackward
+#Set-PSReadlineKeyHandler -Chord Ctrl+p -Function HistorySearchBackward,EndOfLine
 Set-PSReadlineKeyHandler -Chord Ctrl+n -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Chord 'Alt+b' -Function BackwardWord
 Set-PSReadLineKeyHandler -Chord 'Alt+f' -Function ForwardWord
@@ -21,3 +21,8 @@ Set-PSReadLineKeyHandler -Chord 'Alt+.' -Function YankLastArg
 Set-PSReadLineKeyHandler -Chord 'Ctrl+y' -Function Yank
 Set-PSReadLineKeyHandler -Chord 'Ctrl+j' -Function AcceptLine
 #Set-PSReadLineKeyHandler -Chord 'Ctrl+x,e' -Function EditLine
+Set-PSReadlineKeyHandler -Chord 'escape' -Function ScrollDisplayToCursor
+Set-PSReadlineKeyHandler -Chord Ctrl+p -Scriptblock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchBackward()
+    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+}
