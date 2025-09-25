@@ -40,6 +40,9 @@ map <leader>z :e ~/.buffer.md<cr>
 set mat=2
 set novisualbell
 set background=dark
+:vnoremap < <gv
+:vnoremap > >gv
+" check spaces at eol
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/

@@ -1,5 +1,5 @@
-# Documents\WindowsPowerShell\Profile.ps1
-function prompt {"`n$(Get-Date) $(Get-Location)`n> "}
+# Windows - $HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+function prompt {"`n$(Get-Date) $(Get-Location)`nPS> "}
 Set-PSReadlineKeyHandler -Chord Ctrl+a -Function BeginningOfLine
 # Set-PSReadlineKeyHandler -Chord Ctrl+p -Function HistorySearchBackward,EndOfLine
 Set-PSReadlineKeyHandler -Chord Ctrl+n -Function HistorySearchForward
