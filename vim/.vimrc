@@ -20,6 +20,8 @@ map 0 ^
 " set guicursor=n-v-c:block,i:ver25
 map Y y$
 map <C-c> "*y
+inoremap <C-/> <ESC>
+inoremap <C-l> <RIGHT>
 nnoremap <leader>c :call system("wl-copy", @")<CR>
 map <leader><tab> :bNext<CR>
 map <leader>x :bdelete<CR>
@@ -28,6 +30,8 @@ map <leader>E :e .<CR>
 map <leader>e :Ex<CR>
 map <leader>b :enew<CR>
 map <leader>k {w0
+map <leader>/ I# 0<ESC>
+map <leader>? 0xx
 map <leader>j }b0
 set autoread
 nmap <leader>w :w!<cr>
