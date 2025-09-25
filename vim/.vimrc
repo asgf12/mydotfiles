@@ -30,7 +30,7 @@ map <leader>E :e .<CR>
 map <leader>e :Ex<CR>
 map <leader>b :enew<CR>
 map <leader>k {w0
-map <leader>/ I# 0<ESC>
+map <leader>/ I# <ESC>0
 map <leader>? 0xx
 map <leader>j }b0
 set autoread
