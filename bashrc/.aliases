@@ -4,7 +4,7 @@
 [[ -x $(command -v apt) ]] && alias forcedup="sudo apt update && apt list --upgradable 2>&1 | awk -F '/' 'NR>4{print $1}'| xargs sudo apt install -y"
 [[ -x $(command -v xbps-install) ]] && alias voidin="sudo xbps-install -S" && alias voidse="xbps-query -s"
 [[ -x $(command -v fdfind) ]] && alias fd="fdfind"
-[[ -x "$(command -v rpm-ostree)" && ! -x "$(command -v ujust)" ]] && alias fzf="toolbox run fzf" && alias vim="toolbox run vim"
+[[ -x "$(command -v rpm-ostree)" && ! -x "$(command -v ujust)" ]] && alias fzf="toolbox run fzf" && alias vim="toolbox run vim" && alias pwsh="toolbox run pwsh"
 [[ -x "$(command -v rpm-ostree)" ]] && alias rpms="rpm-ostree status"
 alias work="time read -n 1 -e"
 alias hl="rg --passthrough"
@@ -35,6 +35,7 @@ alias gr='git restore'
 alias gl='git log --all --graph'
 alias gpm='git push --repo=git@github.com:asgf12/mydotfiles.git'
 alias dot='cd ~/mydotfiles'
+[[ -d ~/dev/pwsh/aoc ]] && alias aoc='cd ~/dev/pwsh/aoc'
 
 
 upgrade() {
