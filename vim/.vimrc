@@ -25,17 +25,18 @@ inoremap <C-l> <RIGHT>
 nnoremap <leader>c :call system("wl-copy", @")<CR>
 map <leader><tab> :bNext<CR>
 map <leader>x :bdelete
+:vnoremap p P
 map <leader>X :bdelete!<CR>
 map <leader>t :terminal<CR>
 map <leader>E :e ~<CR>
-map <leader>s :so ~/.vimrc
+map <leader>s :so ~/.vimrc<CR>
 map <leader>e :Ex<CR>
 map <leader>b :enew<CR>
 map <leader>k {w0
 map <leader>/ I# <ESC>0
 map <leader>? 0xx
 map <leader>j }b0
-set autoread
+set autoread autoread
 nmap <leader>w :w!<cr>
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
@@ -44,7 +45,6 @@ set showmatch
 set lazyredraw
 map <leader>z :e ~/.buffer.md<cr>
 set mat=2
-set novisualbell
 set background=dark
 :vnoremap < <gv
 :vnoremap > >gv
@@ -72,8 +72,6 @@ map <leader><CR> :let @/=''<cr> " clear search
 " Helps force plugins to load correctly when it is turned back on below
 " filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
-
 " Turn on syntax highlighting
 syntax on
 
@@ -87,7 +85,7 @@ set modelines=0
 set ruler
 
 " Blink cursor on error instead of beeping (grr)
-set visualbell
+set belloff=all
 
 " Encoding
 set encoding=utf-8

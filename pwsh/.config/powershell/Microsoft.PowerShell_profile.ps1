@@ -2,7 +2,6 @@
 function prompt {"`n$(Get-Date) $(Get-Location)`nPS> "}
 Set-PSReadlineKeyHandler -Chord Ctrl+a -Function BeginningOfLine
 # Set-PSReadlineKeyHandler -Chord Ctrl+p -Function HistorySearchBackward,EndOfLine
-Set-PSReadlineKeyHandler -Chord Ctrl+n -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Chord 'Alt+b' -Function BackwardWord
 Set-PSReadLineKeyHandler -Chord 'Alt+f' -Function ForwardWord
 Set-PSReadLineKeyHandler -Chord 'Ctrl+b' -Function BackwardChar
@@ -26,3 +25,8 @@ Set-PSReadlineKeyHandler -Chord Ctrl+p -Scriptblock {
     [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchBackward()
     [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
 }
+Set-PSReadlineKeyHandler -Chord Ctrl+n -Scriptblock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchForward()
+    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+}
+
