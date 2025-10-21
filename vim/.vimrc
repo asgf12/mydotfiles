@@ -20,7 +20,6 @@ map 0 ^
 " set guicursor=n-v-c:block,i:ver25
 map Y y$
 map <C-c> "*y
-inoremap <C-/> <ESC>
 inoremap <C-l> <RIGHT>
 nnoremap <leader>c :call system("wl-copy", @")<CR>
 map <leader><tab> :bNext<CR>

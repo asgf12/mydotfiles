@@ -1,5 +1,5 @@
 [[ -x $(command -v sudo) || $USER = "root" ]] ||  alias sudo=""
-[[ -x $(command -v nixos-generate-config) ]] && alias conf="sudo vim /etc/nixos/configuration.nix" && alias cleanup="sudo nix-collect-garbage -d --delete-older-than 20d" && alias switch="sudo nixos-rebuild switch"
+[[ -x $(command -v nixos-generate-config) ]] && alias conf="sudo vim /etc/nixos/configuration.nix" && alias cleanup="sudo nix-collect-garbage -d --delete-older-than 20d" && alias switch="sudo nixos-rebuild switch" && alias confdir="cd /etc/nixos/nix"
 [[ -x $(command -v apk) ]] && alias sudo="doas" && alias ain="doas apk add" && alias reboot="doas reboot" && alias poweroff="doas poweroff"
 [[ -x $(command -v apt) ]] && alias forcedup="sudo apt update && apt list --upgradable 2>&1 | awk -F '/' 'NR>4{print $1}'| xargs sudo apt install -y"
 [[ -x $(command -v xbps-install) ]] && alias voidin="sudo xbps-install -S" && alias voidse="xbps-query -s"
