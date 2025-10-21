@@ -52,7 +52,7 @@ upgrade() {
     elif [ -x "$(command -v pacman)" ]; then
       echo "== Pacman ==" && sudo pacman -Syu
     elif [ -x "$(command -v zypper)" ]; then
-      echo "== Zypper ==" && sudo zypper dup
+      echo "== Zypper ==" && sudo zypper dup -y
     elif [ -x "$(command -v ujust)" ]; then
       echo "== Ujust ==" && ujust update
     elif [[ -x "$(command -v rpm-ostree)" && ! -x "$(command -v ujust)" ]]; then

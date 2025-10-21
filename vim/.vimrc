@@ -24,10 +24,10 @@ inoremap <C-/> <ESC>
 inoremap <C-l> <RIGHT>
 nnoremap <leader>c :call system("wl-copy", @")<CR>
 map <leader><tab> :bNext<CR>
-map <leader>x :bdelete
-:vnoremap p P
+map <leader>x :bdelete<CR>
 map <leader>X :bdelete!<CR>
-map <leader>t :terminal<CR>
+:vnoremap p P
+" map <leader>t :terminal<CR>
 map <leader>E :e ~<CR>
 map <leader>s :so ~/.vimrc<CR>
 map <leader>e :Ex<CR>
