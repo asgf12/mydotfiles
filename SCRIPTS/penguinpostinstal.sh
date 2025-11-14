@@ -8,7 +8,7 @@ userhome="/home/$name"
 userconf="$userhome/.config"
 bak=".local/bak"
 bin=".local/bin"
-$echosub="echo $name:100000:65536 >> /etc"
+echosub="echo $name:100000:65536 >> /etc"
 
 pkg=(aria2 fd-find fzf git grep gzip man mawk podman python3 pipx tmux unzip vim wget xclip curl stow bat 7zip jq btop)
 # screenfetch aliased to fastferch later, 2 consider ripgrep & tealdeer (not in repos) maybe docker
@@ -48,5 +48,4 @@ if [[ -d $userhome/mydotfiles && ! -h $userhome/.bashrc ]]; then
 	[[ -d $userconf/containers ]] && mv $userconf/containers $userhome/$bak
 fi
 
-[[ -h $userhome/.bashrc ]] || cd $userhome/mydotfiles && stow bashrc podman vim tmux aliases && echo -e 'basic config symlinked\nsourcing not suported\nrestart or\n. $userhome/.bashrc'
-
+[[ -h $userhome/.bashrc ]] || cd $userhome/mydotfiles && stow bashrc podman vim tmux && echo -e 'basic config symlinked\nsourcing not suported\nrestart or\n. $userhome/.bashrc'
