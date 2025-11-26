@@ -60,7 +60,7 @@ upgrade() {
     elif [ -x "$(command -v apk)" ]; then
       echo "== APK ==" && doas apk update && doas apk upgrade
     elif [ -x "$(command -v nixos-rebuild)" ]; then
-      echo "== NIX ==" && sudo nixos-rebuild switch --upgrade
+      echo "== NIX ==" && sudo nixos-rebuild boot --upgrade
     elif [ -x "$(command -v xbps-install)" ]; then
       echo "== Void ==" && sudo xbps-install -Syu
     else
