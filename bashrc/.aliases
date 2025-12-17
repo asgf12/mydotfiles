@@ -8,6 +8,7 @@
 [[ -x "$(command -v rpm-ostree)" && ! -x "$(command -v ujust)" ]] && alias fzf="toolbox run fzf" && alias vim="toolbox run vim" && alias pwsh="toolbox run pwsh"
 [[ -x "$(command -v rpm-ostree)" ]] && alias rpms="rpm-ostree status"
 alias work="time read -n 1 -e"
+alias ver='cat /etc/os-release'
 alias hl="rg --passthrough"
 alias hyp="vim ~/.config/hypr/hyprland.conf"
 alias lastupg='tail -n 4 "$(find ~/.local/log/ -maxdepth 1 -name "*.log" -exec ls -t1 {} + | awk 'NR==1')"'
