@@ -79,12 +79,12 @@ vdd(){
         read -p "provide 'of' = " outp
         echo Runing in 3 seconds: sudo dd if="$inp" of="$outp" status=progress
         sleep 3
-        # sudo dd if="$inp" of="$outp" status=progres
+        sudo dd if="$inp" of="$outp" status=progress
         }
     else {
         echo Runing in 3 seconds: sudo dd if="$1" of="$2" status=progress
         sleep 3
-        # sudo dd if="$1" of="$2" status=progres
+        sudo dd if="$1" of="$2" status=progress
         }
     fi
 }
