@@ -13,13 +13,14 @@ alias hl="rg --passthrough"
 alias hyp="vim ~/.config/hypr/hyprland.conf"
 alias lastupg='tail -n 4 "$(find ~/.local/log/ -maxdepth 1 -name "*.log" -exec ls -t1 {} + | awk 'NR==1')"'
 alias brc="exec bash"
+alias srcal=". ~/.aliases && echo 'aliases sourced'"
 alias srcdot="cd ~/mydotfiles && git pull && cd - && exec bash"
 alias ls="ls --color=auto"
 alias ll="ls -laFh"
 alias la="ls -lAh"
-alias cp="cp -i"
-alias rm="rm -i"
-alias mv="mv -i"
+alias cp="cp -vi"
+alias rm="rm -iv"
+alias mv="mv -iv"
 alias frogssh="ssh frog@frog02.mikr.us -p 10613"
 alias ubuserv="ssh asgf12@192.168.0.200"
 alias ta="tmux attach"
@@ -71,3 +72,19 @@ upgrade() {
   } 2>&1 | tee -a "$LOGFILE"
 }
 
+vdd(){
+    local argum=("$@")
+    if [[ (${#argum[@]} -ne 2) ]]; then {
+        read -p "Using dd, provide 'if' = " inp
+        read -p "provide 'of' = " outp
+        echo Runing in 3 seconds: sudo dd if="$inp" of="$outp" status=progress
+        sleep 3
+        # sudo dd if="$inp" of="$outp" status=progres
+        }
+    else {
+        echo Runing in 3 seconds: sudo dd if="$1" of="$2" status=progress
+        sleep 3
+        # sudo dd if="$1" of="$2" status=progres
+        }
+    fi
+}
